@@ -15,23 +15,25 @@ const FetchData = () => {
       });
   }, []);
   return (
-    <>
+    <section>
       <h2>fetch data example</h2>
       <h3>Github users</h3>
       <ul className="users">
         {users.map((user) => {
-          const { avatar_url, login, url } = user;
+          const { id, avatar_url, login, html_url } = user;
 
           return (
-            <li>
+            <li key={id}>
               <img className="img" src={avatar_url} />
-              <h5>{login}</h5>
-              <a href={url}>Profile</a>
+              <div>
+                <h5>{login}</h5>
+                <a href={html_url}>Profile</a>
+              </div>
             </li>
           );
         })}
       </ul>
-    </>
+    </section>
   );
 };
 export default FetchData;
