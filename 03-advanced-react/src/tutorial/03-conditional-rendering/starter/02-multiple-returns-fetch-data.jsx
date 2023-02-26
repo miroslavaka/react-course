@@ -11,19 +11,29 @@ const MultipleReturnsFetchData = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(url);
+        //here we can set condition - if response is not ok
+        if (!response.ok) {
+          setIsError(true);
+          setIsLoading(false);
+          return;
+        }
         const user = await response.json();
         console.log(user);
         setUser(user);
       } catch (error) {
         setIsError(true);
+        // fetch only cares about network errors
         console.log(error);
       }
       //once we are done with loading we want to set it to false
+      //if there is error - display error message
       setIsLoading(false);
     };
     fetchData();
   }, []);
 
+  //loading - waiting for data to arrive (display loading state)
+  //sucess - received data, dispaly data
   if (isLoading) {
     return <h2>Loading...</h2>;
   }
